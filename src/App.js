@@ -36,7 +36,7 @@ export default function App() {
         <FormTodo addTodo={addTodo} />
         <div>
           {todos.map((todo, index) => (
-            <Card>
+            <Card key={index}>
               <Card.Body>
                 <Todo
                   key={index}
