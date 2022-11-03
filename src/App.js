@@ -4,47 +4,21 @@ import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FormTodo from './components/addtodo/AddTodo';
 import Todo from './components/todo/Todo';
+import { useSelector } from 'react-redux';
 
 export default function App() {
-  const [todos, setTodos] = React.useState([
-    {
-      text: 'This is a sampe todo',
-      isDone: false,
-    },
-  ]);
+  const { todos } = useSelector((state) => state);
 
-  const addTodo = (text) => {
-    const newTodos = [...todos, { text }];
-    setTodos(newTodos);
-  };
-
-  const markTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].isDone = true;
-    setTodos(newTodos);
-  };
-
-  const removeTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-  };
   return (
     <div className="app">
       <div className="container">
         <h1 className="text-center mb-4">Todo List</h1>
-        <FormTodo addTodo={addTodo} />
+        <FormTodo />
         <div>
           {todos.map((todo, index) => (
             <Card key={index}>
               <Card.Body>
-                <Todo
-                  key={index}
-                  index={index}
-                  todo={todo}
-                  markTodo={markTodo}
-                  removeTodo={removeTodo}
-                />
+                <Todo key={index} index={index} todo={todo} />
               </Card.Body>
             </Card>
           ))}

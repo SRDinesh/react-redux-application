@@ -1,7 +1,20 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-export default function Todo({ todo, index, markTodo, removeTodo }) {
+import { useDispatch } from 'react-redux';
+import { markTodoAction, deleteTodoAction } from '../store/action';
+
+export default function Todo({ todo, index }) {
+  const dispatch = useDispatch();
+
+  const markTodo = (index) => {
+    dispatch(markTodoAction(index));
+  };
+
+  const removeTodo = (index) => {
+    dispatch(deleteTodoAction(index));
+  };
+
   return (
     <div className="todo">
       <span style={{ textDecoration: todo.isDone ? 'line-through' : '' }}>

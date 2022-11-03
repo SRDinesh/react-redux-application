@@ -1,13 +1,16 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { addTodoAction } from '../store/action';
 
-export default function FormTodo({ addTodo }) {
+export default function FormTodo() {
   const [value, setValue] = React.useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!value) return;
-    addTodo(value);
+    dispatch(addTodoAction(value));
     setValue('');
   };
 
